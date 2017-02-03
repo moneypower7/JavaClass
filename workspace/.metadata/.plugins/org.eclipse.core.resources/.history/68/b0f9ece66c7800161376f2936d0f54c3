@@ -1,0 +1,24 @@
+
+public class Book {
+	private String title;
+	private int stock;
+	private double cost;
+	//Constructor
+	public Book(String inTitle,int inStock,double inCost){
+		title = inTitle;
+		stock = inStock;
+		cost = inCost;
+	}
+	public String getTitle(){
+		return title;
+	}
+	public int getStock(){
+		return stock;
+	}
+	public double getCost(){
+		return cost;
+	}
+	public double totalValue(){
+		return (stock*cost);
+	}
+}

@@ -1,0 +1,102 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class WordSearch {
+	private char[][] array;
+	private String Search;
+	private String searchIndex = ""; // Holds the values of the array in one
+										// string for later searching
+	Scanner u = new Scanner(System.in);
+	private int row, col;
+
+	public WordSearch(char[][] inArray) {
+		array = inArray;
+		row = array.length;
+		col = array[0].length;
+	}
+
+	// Plays the search and calls the other methods
+	public void play() {
+		Search = "start";
+		while (!Search.equals("end")) {
+			print();
+			readIn();
+			searchHoriz();
+			searchVert();
+			searchDiag();
+			System.out.println();
+		}
+	}
+
+	// Reads in the word we are searching for
+	public void readIn() {
+		System.out.println("What word do you want to search for? (Type end to quit)");
+		Search = u.nextLine();
+	}
+
+	public void searchHoriz() {
+		for (int i = 0; i < row; i++) {
+			searchIndex = "";
+			for (int j = 0; j < col; j++) {
+				searchIndex += array[i][j];
+			}
+			if (searchIndex.contains(Search)) {
+				System.out.println(Search + " was found horizontally at row " + i + " and column "
+						+ searchIndex.indexOf(Search) + "!");
+			}
+		}
+
+	}
+
+	public void searchVert() {
+		for (int j = 0; j < col; j++) {
+			searchIndex = "";
+			for (int i = 0; i < row; i++) {
+				searchIndex += array[i][j];
+			}
+			if (searchIndex.contains(Search)) {
+				System.out.println(Search + " was found vertically at row " + searchIndex.indexOf(Search)
+						+ " and column " + j + "!");
+			}
+		}
+	}
+
+	public void searchDiag() {
+		//Searches the diagonals on the left of the
+		/*
+		for (int n = 0; n < row; n++) {
+			searchIndex = "";
+			int spaceLeft = Math.min(array.length - n, array[0].length - 0);
+			for (int i = 0; i < spaceLeft; i++) {
+				searchIndex +=array[n + i][0 + i];
+			}
+			if (searchIndex.contains(Search)) {
+				System.out.println(Search + " was found vertically at row " + n
+						+ " and column " + searchIndex.indexOf(Search) + "!");
+			}
+		}
+		
+		
+		*/
+		
+		for (int n = 0; n < col; n++) {
+			int spaceLeft = Math.min(array.length - n, array[1].length - 1);
+			for (int i = 0; i < spaceLeft; i++) {
+				System.out.print(array[1 + i][n + i]);
+			}
+			System.out.println("\n");
+			if (searchIndex.contains(Search)) {
+				System.out.println(Search + " was found vertically at row " + n
+						+ " and column " + searchIndex.indexOf(Search) + "!");
+			}
+		}
+		
+	}
+
+	public void print() {
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(String.valueOf(array[i]));
+		}
+		System.out.println();
+	}
+}

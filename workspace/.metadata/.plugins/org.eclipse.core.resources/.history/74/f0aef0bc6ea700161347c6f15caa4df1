@@ -1,0 +1,75 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class WordSearch {
+	private char[][] array;
+	private String Search;
+	Scanner u = new Scanner(System.in);
+	private int error; // used to keep track of if the character we are
+						// searching for doesnt match
+
+	public WordSearch(char[][] inArray) {
+		array = inArray;
+	}
+
+	// Plays the search and calls the other methods
+	public void play() {
+		Search = "start";
+		while (!Search.equals("end")) {
+			print();
+			readIn();
+			searchHoriz();
+			searchVert();
+			searchDiag();
+		}
+	}
+
+	// Reads in the word we are searching for
+	public void readIn() {
+		System.out.println("What word do you want to search for? (Type end to quit)");
+		Search = u.nextLine();
+	}
+
+	public void searchHoriz() {
+		int n;
+		error = 0;
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				error = 0;
+				if (array[i][j] == Search.charAt(0)) {
+					n = 1;
+					while (n <= Search.length()) {
+						if ((j + n) < array[i].length) {
+							if (array[i][j + 1] == Search.charAt(n)) {
+								n++;
+							} else {
+								error += 1;
+								n = Search.length();
+							}
+						}
+
+					}
+					if (error == 0) {
+						System.out.println("Cat found horizontally at row " + i + " and column " + j + "!");
+					}
+					error = 0;
+				}
+			}
+		}
+	}
+
+	public void searchVert() {
+
+	}
+
+	public void searchDiag() {
+
+	}
+
+	public void print() {
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(String.valueOf(array[i]));
+		}
+		System.out.println();
+	}
+}

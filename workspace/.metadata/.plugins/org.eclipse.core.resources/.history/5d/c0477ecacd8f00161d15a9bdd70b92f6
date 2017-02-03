@@ -1,0 +1,68 @@
+
+/**
+ * Inlab6 number guessing game.
+ * 
+ * @author yaw 
+ * @version 011 Oct 
+ */
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessGame
+{
+    public static void example()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Give me a number:");
+        int num = in.nextInt();
+        System.out.println("You gave me " + num);
+    }
+    public static void play1(){
+    	Scanner in = new Scanner(System.in);
+    	Random rand = new Random();
+    	int v1, guess; // version 1 so a number between 1 and 10
+    	v1 = rand.nextInt(10) + 1;
+    	System.out.println("I am thinking of a number between 1 and 10");
+    	System.out.println("What is your guess?");
+    	guess = in.nextInt();
+    	while (guess != v1){
+    		if (guess<v1){
+    			System.out.println("Bigger!");
+    			System.out.println("What is your guess?");
+    			guess = in.nextInt();
+    			
+    		}else{
+    			System.out.println("Smaller!");
+    			System.out.println("What is your guess?");
+    			guess = in.nextInt();
+    		}
+    	}
+    	System.out.println("You guesses it! I am proud of you.");
+    	System.out.println();
+    	
+    }
+    public static void play2(){
+    	Scanner in = new Scanner(System.in);
+    	Random rand = new Random();
+    	int v2, guess; // version 2 so a number between 5 and 5
+    	v2 = rand.nextInt(25) + 5;
+    	System.out.println("I am thinking of a number between 5 and 25");
+    	guess = in.nextInt();
+    	for (int n = 1;n<6;n++){
+    		guess = in.nextInt();
+    		if (guess<v2){
+    			System.out.println("Bigger!");
+    			System.out.println("What is guess #" + n +"?");
+    			guess = in.nextInt();
+    			n++;
+    			
+    		}else{
+    			System.out.println("Smaller!");
+    			System.out.println("What is guess #" + n +"?");
+    			guess = in.nextInt();
+    			n++;
+    		}
+    	}
+    }
+    
+}

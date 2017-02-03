@@ -1,0 +1,74 @@
+import java.util.Random;
+
+public class PetalsGame {
+	// Instance object and variables
+	Random rand = new Random();
+	int d1, d2, d3, d4, d5,numPetals; // 5 Dice and number of petals
+
+	public void rollDice() {
+		d1 = rand.nextInt(6) + 1;
+		d2 = rand.nextInt(6) + 1;
+		d3 = rand.nextInt(6) + 1;
+		d4 = rand.nextInt(6) + 1;
+		d5 = rand.nextInt(6) + 1;
+	}
+
+	public void printDice() {
+		System.out.println("You rolled the following: " + d1 + " , " + d2 + "," + d3 + " , " + d4 + " , " + d5);
+	}
+	public int calculateAllPetals(){
+		//Could have been done a little more efficiently with if statements, but I prefer switch statements for this type of problem.
+		numPetals = 0;
+		switch (d1){
+		case 3:
+			numPetals += 2;
+			break;
+		case 5:
+			numPetals +=4;
+			break;
+		default: //Any other number does not change the number of petals, I know this code is not necessary but I think it provides a clear visual representation of what is happening
+			numPetals += 0;
+		}
+		switch (d2){
+		case 3:
+			numPetals += 2;
+			break;
+		case 5:
+			numPetals +=4;
+			break;
+		default: //Any other number does not change the number of petals, I know this code is not necessary but I think it provides a clear visual representation of what is happening
+			numPetals += 0;
+		}
+		switch (d3){
+		case 3:
+			numPetals += 2;
+			break;
+		case 5:
+			numPetals +=4;
+			break;
+		default: //Any other number does not change the number of petals, I know this code is not necessary but I think it provides a clear visual representation of what is happening
+			numPetals += 0;
+		}
+		switch (d4){
+		case 3:
+			numPetals += 2;
+			break;
+		case 5:
+			numPetals +=4;
+			break;
+		default: //Any other number does not change the number of petals, I know this code is not necessary but I think it provides a clear visual representation of what is happening
+			numPetals += 0;
+		}
+		switch (d5){
+		case 3:
+			numPetals += 2;
+			break;
+		case 5:
+			numPetals +=4;
+			break;
+		default: //Any other number does not change the number of petals, I know this code is not necessary but I think it provides a clear visual representation of what is happening
+			numPetals += 0;
+		}
+		return numPetals;
+	}
+}

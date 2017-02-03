@@ -1,0 +1,40 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class WordSearch {
+	private char[][] array;
+	private String Search;
+	Scanner u = new Scanner(System.in);
+	public WordSearch(char[][] inArray){
+		array = inArray;
+	}
+	public void play(){
+		Search = "start";
+		while (!Search.equals("end")){
+			print();
+			readIn();
+			searchHoriz();
+			searchVert();
+			searchDiag();
+		}
+	}
+	public void readIn(){
+		System.out.println("What word do you want to search for? (Type end to quit)");
+		Search = u.nextLine();
+	}
+	public void searchHoriz(){
+		
+	}
+	public void searchVert(){
+		
+	}
+	public void searchDiag(){
+		
+	}
+	public void print(){
+		for(int i=0;i<array.length;i++){
+	        System.out.println(String.valueOf(array[i]));
+	    }
+		System.out.println();
+	}
+}

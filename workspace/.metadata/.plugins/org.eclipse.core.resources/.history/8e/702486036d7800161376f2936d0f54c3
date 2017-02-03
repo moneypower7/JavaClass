@@ -1,0 +1,11 @@
+
+public class Driver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Book book1;
+		book1 = new Book("Dracula",22,7.55);
+		System.out.println(book1.getTitle() + "costs $" + book1.getCost() + " and there are " + book1.getStock() + " books in stock, the toal value of this current book in stock is $" + book1.totalValue());
+	}
+
+}
