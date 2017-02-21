@@ -7,10 +7,10 @@ public class Card {
 		cardNum = inNum;
 		suit = inSuit;
 	}
-	public String getSuit(){ //Returns the suit as a string
-		return suit;
-	}
 	public int getNum(){ //Returns the card number 11=Jack 12=Queen 13=King 14 = Ace
 		return cardNum;
+	}
+	public String getSuit(){ //Returns the suit as a string
+		return suit;
 	}
 }

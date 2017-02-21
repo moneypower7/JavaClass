@@ -1,0 +1,41 @@
+
+public class Ski 
+{
+	private String name;
+	private int totalStars;
+	public int review;
+	
+	//constructor
+	public Ski(String inName)
+	{
+		name = inName;
+		
+	}
+
+	//methods
+	public  void addCustReview(int stars)
+	{
+		totalStars += stars;
+	}
+
+	public void avgRating(double rating)
+	{
+		totalStars* 1/totalreviews= rating;
+	}
+	
+	public void totalReviews(int reviews)
+	{
+		review += reviews;
+	}
+	
+	//stats method
+	public void printStats()
+	{
+		System.out.println( "Name: " + name );
+		System.out.println("Average Rating: " + avgRating);
+		System.out.println("Total Number of Reviews: "+ totalReviews);
+		
+	}
+
+
+}

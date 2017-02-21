@@ -1,0 +1,132 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Game {
+	Card[] deck = new Card[52];
+	Card[] usedCards = new Card[52];
+	Random rand = new Random(); // used to generate a random card draw method
+	//Player declarations to handle up to 4 players
+	Player dealer = new Player();
+	Player p1 = new Player();
+	Player p2 = new Player();
+	Player p3 = new Player();
+	Player p4 = new Player();
+	int randCard; // Assigned to a random integer that corresponds to a card in
+					// the deck
+	int players; //used for the user to input how many players will be playing
+	Scanner u = new Scanner(System.in); //Scanner
+	//Constructor gives the dealer essentially infinite cash
+	public Game(){
+		dealer.addCash(Integer.MAX_VALUE);
+	}
+	public void genDeck() { // Generates a deck of 52 cards
+		for (int x = 0; x < 14; x++) {
+			deck[x] = new Card(x+2, "Hearts");
+		}
+		for (int x = 14; x < 27; x++) {
+			deck[x] = new Card((x - 12), "Diamonds");
+		}
+		for (int x = 27; x < 40; x++) {
+			deck[x] = new Card((x - 25), "Clubs");
+		}
+		for (int x = 40; x < 53; x++) {
+			deck[x] = new Card((x - 38), "Spades");
+		}
+	}
+
+	public void shuffle() { // Shuffles the deck using the variable temp as a
+							// placeholder to hold the card while another card
+							// is moved
+		for (int x = deck.length - 1; x > 0; x--) {
+			int rand = (int) (Math.random() * (x + 1));
+			Card temp = deck[x];
+			deck[x] = deck[rand];
+			deck[rand] = temp;
+		}
+	}
+	//Has the user input how many players will be playing and assigns a cash value to each player
+	public void getPlayers(){
+		System.out.println("How many players will be playing? (Up to 4 players)");
+		players = u.nextInt();
+		switch (players){
+		case 1:
+			p1.addCash(500);
+			break;
+		case 2:
+			p1.addCash(500);
+			p2.addCash(500);
+			break;
+		case 3:
+			p1.addCash(500);
+			p2.addCash(500);
+			p3.addCash(500);
+			break;
+		case 4:
+			p1.addCash(500);
+			p2.addCash(500);
+			p3.addCash(500);
+			p4.addCash(500);
+			break;
+		default:
+				System.out.println("Error, please enter a valid number of players");
+				getPlayers();
+		}
+		
+	}
+
+	public void deal(int inPlayer) { //Deals the card to the player that is specified in the parameter
+		randCard = rand.nextInt(52);
+		while (deck[randCard] == null){
+			randCard = rand.nextInt(52);
+		}
+		switch (inPlayer) {
+		case 1:
+			p1.addCard(deck[randCard]);
+			break;
+		case 2:
+			p2.addCard(deck[randCard]);
+			break;
+		case 3:
+			p3.addCard(deck[randCard]);
+			break;
+		case 4:
+			p4.addCard(deck[randCard]);
+			break;
+		case 5: //Case to deal to the dealer
+			dealer.addCard(deck[randCard]);
+			break;
+		}
+		System.out.print("You have been dealt the ");
+		switch (deck[randCard].getNum()) { // Switch statement to determine if
+											// the card dealt to the player was
+											// a face card, and if so print out
+											// the card's name instead of
+											// number value
+		case 11:
+			System.out.print("Jack");
+			break;
+		case 12:
+			System.out.print("Queen");
+			break;
+		case 13:
+			System.out.print("King");
+			break;
+		case 14:
+			System.out.print("Ace");
+			break;
+		default:
+			System.out.print(deck[randCard].getNum());
+			break;
+		}
+		System.out.println(" of " + deck[randCard].getSuit());
+		deck[randCard] = null;
+	}
+
+	public void play() {
+		genDeck();
+		shuffle();
+		while (players!=0){
+			
+		}
+	}
+}

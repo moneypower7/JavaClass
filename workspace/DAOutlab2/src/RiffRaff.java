@@ -1,0 +1,52 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
+
+public class RiffRaff {
+	PrintWriter writer;
+	Scanner scanner = new Scanner(System.in);
+	String inFile;
+	int line; // what line we are currently reading in
+
+	public void readIn() throws UnsupportedEncodingException, FileNotFoundException { // Reads in the
+																// N,K, and M
+																// values
+		writer = new PrintWriter("LinkedListProgram.txt", "UTF-8");
+		System.out.println("What file would you like to use as the input file (Example: input.txt)");
+		inFile = scanner.nextLine();
+		try {
+			// open the file that the user inputs
+			FileReader fileName = new FileReader(inFile);
+			Scanner fileRead = new Scanner(fileName);
+			int sum = 1;
+			int n, k, m;
+			n = 1;
+			k = 1;
+			m = 1;
+			while (sum != 0) {
+				sum = 0;
+				n = fileRead.nextInt();
+				k = fileRead.nextInt();
+				m = fileRead.nextInt();
+				sum = n + k + m;
+				CircleLinkedList LL = new CircleLinkedList(n,writer);
+				if (sum != 0) { // Calls the linked list method if the sum is
+								// not 0 (its not the end of the file)
+					System.out.println(n + " " + k + " " + m);
+					LL.candidateSelection(n, k, m);
+				}else{
+					LL.closeWriter();
+				}
+			}
+			fileRead.close();
+		} catch (FileNotFoundException exception) {
+			// error is thrown if file cannot be found. See directions or email
+			// me...
+			System.out.println("File Not Found!");
+		}
+		System.out.println("Done");
+	}
+
+}

@@ -1,0 +1,4 @@
+
+public class Driver {
+	RiffRaff riff = new RiffRaff();
+}

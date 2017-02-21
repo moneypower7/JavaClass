@@ -1,0 +1,186 @@
+import java.util.*;
+
+public class Player {
+	boolean error; // used to make sure the user enters a choice for the value
+	// Creates a player's hand with two array lists, one containing the number
+	// value of the card, the other containing the suit of the card (1 to 1
+	// correlation between the number and suit)
+	ArrayList<Integer> handNum = new ArrayList<Integer>();
+	ArrayList<String> handSuit = new ArrayList<String>();
+	// of the ace
+	boolean playing; // Used to determine if the player would like to keep
+						// playing this hand
+	private int total, aceChoice, cash, bet;
+	Scanner u = new Scanner(System.in);
+
+	// Constructor
+	public Player() {
+		playing = true;
+		cash = 0;
+	}
+
+	// Method to determine if the player can still play, returns the current
+	// amount of cash the player has, therefore the game will automatically quit
+	// when there are no players left
+	public void addCard(Card inCard) {
+		handNum.add(inCard.getNum());
+		handSuit.add(inCard.getSuit());
+	}
+
+	// Method to add cash to the users wallet
+	public void addCash(int inCash) {
+		cash += inCash;
+	}
+
+	public void canPlay(Player inDealer, int inPlayer) { // Determines if the
+															// player can play
+															// this hand or
+		// not, and if so it will call the play hand method
+		if (cash == 0) {
+			playing = false; // If the player has no cash they cannot play
+		} else {
+			playing = true;
+		}
+		if (playing = true) {
+			System.out.println("Turn: Player " + inPlayer);
+			playHand(inDealer, inPlayer);
+		}
+	}
+
+	public void dealerHand() {
+
+	}
+
+	public void getBet(int inPlayer) {
+		if (cash > 0) {
+			System.out.println(
+					"Player " + inPlayer + "   What would you like to bet on this hand? (Bets are taken in whole dollars only) You currently have $"
+							+ cash);
+			bet = u.nextInt();
+		}
+	}
+
+	public int getCash() { // Returns how much cash the player has
+		return cash;
+	}
+
+	public boolean getPlaying() {
+		return playing;
+	}
+	public int getTotal(){ //Returns the total points the player has for that hand
+		return total;
+	}
+	public void reset(){ //Resets after the hand is done
+		handNum.clear();
+		handSuit.clear();
+		total = 0;
+	}
+	public void playHand(Player inDealer, int inPlayer) { // Allows the user to
+															// play a hand and
+															// decide whether or
+															// not to get dealt
+															// more cards
+		String yn; // yes or no
+		inDealer.printHand(5);
+		printHand(inPlayer);
+		pointTotal();
+		System.out.println("Your current point total is " + total);
+		System.out.println("Would you like another card? (Enter 'Yes' or 'No')");
+		yn = u.nextLine();
+		if (yn.toLowerCase().equals("yes")) {
+			playing = true;
+		} else {
+			playing = false;
+		}
+	}
+
+	public void pointTotal() { // Calculates the total value of the cards in the
+								// player's hand
+		total = 0;
+		for (int x = 0; x < handNum.size(); x++) {
+			error = true;
+			while (error = true) {
+				switch (handNum.get(x)) {
+				case 11:
+					total += 10;
+					error = false;
+					break;
+				case 12:
+					total += 10;
+					error = false;
+					break;
+				case 13:
+					total += 10;
+					error = false;
+					break;
+				case 14:
+					System.out.println("Your current point total is: " + total
+							+ " This does not include your Ace, would you like the ace to be worth 11 points or 1 point? (Enter 1 or 11");
+					aceChoice = u.nextInt();
+					switch (aceChoice) { // Determines if the user would like to
+											// use the 11 point value or the 1
+											// for the ace
+					case 1:
+						total += 1;
+						error = false;
+						break;
+					case 11:
+						total += 11;
+						error = false;
+						break;
+					default:
+						System.out.println("Error, please make a choice for the value of your Ace. (Enter 1 or 11)");
+						aceChoice = u.nextInt();
+					}
+					break;
+				default:
+					total += handNum.get(x);
+					break;
+
+				}
+			}
+			if (total > 31) { // Sets the total to -1 if the player or dealer
+								// busts (goes over 31)
+				total = -1;
+			}
+
+		}
+
+	}
+
+	public void printHand(int playerNum) {// Prints the contents of the player's
+											// hand
+		if (playerNum == 5) { // Dealer is player 5 by default
+			System.out.println("The dealer's hand consists of: ");
+		} else {
+			System.out.println("Player " + playerNum + " Your hand consists of: ");
+		}
+
+		for (int x = 0; x < handNum.size(); x++) {
+			switch (handNum.get(x)) { // Switch statement to determine if
+			// the card dealt to the player was
+			// a face card, and if so print out
+			// the card's name instead of
+			// number value
+			case 11:
+				System.out.print("Jack");
+				break;
+			case 12:
+				System.out.print("Queen");
+				break;
+			case 13:
+				System.out.print("King");
+				break;
+			case 14:
+				System.out.print("Ace");
+				break;
+			default:
+				System.out.print(handNum.get(x));
+			}
+			System.out.println(" of " + handSuit.get(x) + ", ");
+		}
+		pointTotal();
+		System.out.println("And a total of " + total);
+	}
+
+}
